@@ -1,4 +1,4 @@
-package main
+package Routes
 
 import (
 	"github.com/gin-gonic/gin"
@@ -12,5 +12,6 @@ func RegisterRoutes(router *gin.Engine) {
 		api.GET("/wisata", controllers.GetWisataByCity)
 		api.GET("/kuliner", controllers.GetKulinerByCity)
 		api.GET("/event", controllers.GetEventByCity)
+		api.GET("/api/places", controllers.GetPlaces)
 	}
 }

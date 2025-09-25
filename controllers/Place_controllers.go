@@ -56,3 +56,24 @@ func GetKulinerByCity(c *gin.Context) {
 		"kuliner":  places,
 	})
 }
+func GetPlaces(c *gin.Context) {
+	cityName := c.Query("city_name")
+	category := c.Query("category")
+
+	if cityName == "" || category == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "city_name dan category wajib diisi"})
+		return
+	}
+
+	places, err := services.GetPlacesByCityAndCategory(cityName, category)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"city":     cityName,
+		"category": category,
+		"places":   places,
+	})
+}

@@ -21,8 +21,29 @@ func ConnectToDB() {
 }
 
 func SyncDatabase() {
-	err := DB.AutoMigrate(&models.User{})
+	err := DB.AutoMigrate(
+		&models.User{},
+		&models.City{},
+		&models.Place{},
+		&models.PromptLog{},
+		&models.AIEvent{},
+		&models.PromptTemplate{},
+		&models.Event{},
+	)
 	if err != nil {
 		fmt.Println("failed to migrate database")
 	}
+}
+func ResetDatabase() {
+	DB.Migrator().DropTable(
+		&models.User{},
+		&models.City{},
+		&models.Place{},
+		&models.PromptLog{},
+		&models.AIEvent{},
+		&models.PromptTemplate{},
+		&models.Event{},
+	)
+
+	SyncDatabase()
 }

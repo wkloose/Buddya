@@ -21,3 +21,12 @@ func GetKulinerByCityID(cityID uint) ([]models.Place, error) {
 	}
 	return places, nil
 }
+func GetPlacesByCityAndCategory(cityName, category string) ([]models.Place, error) {
+	var places []models.Place
+	err := initializers.DB.
+		Joins("JOIN cities ON places.city_id = cities.id").
+		Where("cities.name = ? AND places.category = ?", cityName, category).
+		Find(&places).Error
+
+	return places, err
+}
