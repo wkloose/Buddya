@@ -11,5 +11,6 @@ func RegisterRoutes(router *gin.Engine) {
 		api.GET("/budaya", controllers.GetBudayaByCity)
 		api.GET("/wisata", controllers.GetWisataByCity)
 		api.GET("/kuliner", controllers.GetKulinerByCity)
+		api.GET("/event", controllers.GetEventByCity)
 	}
 }
