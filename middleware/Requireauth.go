@@ -6,8 +6,8 @@ import (
 
     "github.com/gin-gonic/gin"
     "github.com/golang-jwt/jwt/v5"
-    "github.com/wkloose/tempproject.git/initializers"
-    "github.com/wkloose/tempproject.git/models"
+    "dekajar/initializers"
+    "dekajar/models"
 )
 
 func RequireAuth(c *gin.Context) {

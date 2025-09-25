@@ -3,8 +3,7 @@ package initializers
 import (
 	"fmt"
 	"os"
-
-	"github.com/wkloose/tempproject.git/models"
+	"dekajar/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

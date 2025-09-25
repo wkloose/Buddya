@@ -1,25 +1,13 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/wkloose/tempproject.git/controllers"
 )
 
-func RegisterRoutes(r *gin.Engine) {
-	// Endpoint dasar
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "API is running",
-		})
-	})
-
-	// Route group: /api
-	api := r.Group("/api")
+func RegisterRoutes(router *gin.Engine) {
+	api := router.Group("/api")
 	{
-		api.GET("/ping", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{"message": "pong"})
-		})
-
+		api.GET("/budaya", controllers.GetBudayaByCity)
 	}
 }
