@@ -2,8 +2,9 @@ package main
 
 import (
 	"os"
-	"github.com/wkloose/tempproject.git/initializers"
-	"github.com/wkloose/tempproject.git/middleware"
+	"github.com/wkloose/Buddya/initializers"
+	"github.com/wkloose/Buddya/middleware"
+	//"github.com/wkloose/Buddya/Routes"
 	"github.com/gin-gonic/gin"
 )
 

@@ -3,8 +3,8 @@ package services
 import (
 	"errors"
 
-	"github.com/wkloose/tempproject.git/initializers"
-	"github.com/wkloose/tempproject.git/models"
+	"github.com/wkloose/Buddya/initializers"
+	"github.com/wkloose/Buddya/models"
 )
 
 func GetBudayaByCityID(cityID uint) (string, error) {

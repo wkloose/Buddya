@@ -3,7 +3,7 @@ package initializers
 import (
 	"fmt"
 	"os"
-	"dekajar/models"
+	"github.com/wkloose/Buddya/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

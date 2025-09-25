@@ -1,4 +1,6 @@
-module github.com/wkloose/tempproject.git
+module github.com/wkloose/Buddya
+
+
 
 go 1.24.0
 

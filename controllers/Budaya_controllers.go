@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/wkloose/tempproject.git/services"
+	"github.com/wkloose/Buddya/services"
 )
 
 func GetBudayaByCity(c *gin.Context) {
