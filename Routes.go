@@ -9,5 +9,7 @@ func RegisterRoutes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
 		api.GET("/budaya", controllers.GetBudayaByCity)
+		api.GET("/wisata", controllers.GetWisataByCity)
+		api.GET("/kuliner", controllers.GetKulinerByCity)
 	}
 }
