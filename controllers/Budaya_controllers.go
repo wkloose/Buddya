@@ -1,34 +1,49 @@
 package controllers
 
 import (
-	"net/http"
+	"strings"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/wkloose/Buddya/initializers"
 	"github.com/wkloose/Buddya/services"
+	"github.com/wkloose/Buddya/models"
 )
 
 func GetBudayaByCity(c *gin.Context) {
-	cityIDParam := c.Query("city_id")
-	if cityIDParam == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "parameter city_id wajib diisi"})
-		return
-	}
+    cityIDParam := c.Query("city_id")
+    cityName := strings.TrimSpace(c.Query("city_name"))
 
-	cityID, err := strconv.Atoi(cityIDParam)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "city_id harus berupa angka"})
-		return
-	}
+    var city models.City
 
-	budaya, err := services.GetBudayaByCityID(uint(cityID))
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
-		return
-	}
+    if cityIDParam != "" {
+        cityID, err := strconv.Atoi(cityIDParam)
+        if err != nil {
+            c.JSON(400, gin.H{"error": "city_id harus berupa angka"})
+            return
+        }
+        if err := initializers.DB.First(&city, cityID).Error; err != nil {
+            c.JSON(404, gin.H{"error": "city not found"})
+            return
+        }
+    } else if cityName != "" {
+        if err := initializers.DB.Where("LOWER(nama_kota) = LOWER(?)", cityName).First(&city).Error; err != nil {
+            c.JSON(404, gin.H{"error": "city not found"})
+            return
+        }
+    } else {
+        c.JSON(400, gin.H{"error": "parameter city_id atau city_name wajib diisi"})
+        return
+    }
 
-	c.JSON(http.StatusOK, gin.H{
-		"city_id": cityID,
-		"budaya":  budaya,
-	})
+    budaya, err := services.GetBudayaByCityID(city.ID)
+    if err != nil {
+        c.JSON(500, gin.H{"error": "gagal mengambil data budaya"})
+        return
+    }
+
+    c.JSON(200, gin.H{
+        "city":   city.NamaKota,
+        "budaya": budaya,
+    })
 }
