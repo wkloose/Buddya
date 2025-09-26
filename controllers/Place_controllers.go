@@ -107,3 +107,21 @@ func GetPlaces(c *gin.Context) {
 		"places":   places,
 	})
 }
+func GetAllByCity(c *gin.Context) {
+	cityName := strings.TrimSpace(c.Query("city_name"))
+	if cityName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "parameter city_name wajib diisi"})
+		return
+	}
+
+	result, err := services.GetAllByCity(cityName)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "city not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"city":    cityName,
+		"results": result,
+	})
+}
