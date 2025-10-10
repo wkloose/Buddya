@@ -6,6 +6,7 @@ import (
 	"github.com/wkloose/Buddya/initializers"
 	"github.com/wkloose/Buddya/models"
 )
+
 func SeedPrompt() {
 	prompt := models.PromptTemplate{
 		Kategori: "event",
@@ -26,4 +27,3 @@ Jawab HANYA dalam format JSON array tanpa teks tambahan, dengan struktur:
 
 	initializers.DB.Create(&prompt)
 }
-
