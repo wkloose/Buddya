@@ -1,4 +1,4 @@
-package Prompt
+package prompt
 
 import (
 	"time"
